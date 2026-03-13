@@ -1,20 +1,43 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 function DettaglioProdotto() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
             .then((res) => setProduct(res.data))
             .catch((error) => alert("Errore caricamento informazioni prodotto"));
-    }, []);
+    }, [id]);
+
+    if (!product) {
+        return <p>Loading...</p>
+    }
+
+    function nextProduct() {
+        const newid = parseInt(id) + 1;
+        navigate(`/prodotti/${newid}`);
+    }
+
+    function prevProduct() {
+        const newid = parseInt(id) - 1;
+        if (newid > 0) { navigate(`/prodotti/${newid}`) }
+        else { return navigate(`/prodotti`) }
+    }
+
 
     return (
         <>
             <div className="container mt-5">
+
                 <h1 className="mb-4">{product?.title}</h1>
                 {product && (
                     <div className="card p-4 text-center">
@@ -25,9 +48,14 @@ function DettaglioProdotto() {
                         />
                         <h3 className="mt-3">{product.price} €</h3>
                         <p className="mt-3">{product.description}</p>
-                    </div>)}
+                        <button className="btn btn-primary mt-3" onClick={nextProduct}>Prossimo prodotto</button>
+                        <button className="btn btn-secondary mt-3 ms-2" onClick={prevProduct}>Prodotto precedente</button>
+                    </div>
+                )}
             </div>
-        </>);
+        </>
+    );
+
 }
 
 export default DettaglioProdotto;

@@ -18,7 +18,6 @@ function Prodotti() {
             <div className="row">
                 {products.map((product) => (
                     <div key={product.id} className="col-4 mb-4">
-                        <Link to={`/prodotti/${product.id}`}>Scopri prodotto</Link>
                         <div className="card h-100 text-center p-3">
                             <img src={product.image}
                                 className="card-img-top"
@@ -31,6 +30,8 @@ function Prodotti() {
                                 <p className="card-text fw-bold">
                                     {product.price} €
                                 </p>
+                                <Link to={`/prodotti/${product.id}`}>Scopri prodotto</Link>
+
                             </div>
                         </div>
                     </div>
