@@ -1,5 +1,6 @@
 import { useState, useEffect, use } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Prodotti() {
     const [products, setProducts] = useState([]);
@@ -17,6 +18,7 @@ function Prodotti() {
             <div className="row">
                 {products.map((product) => (
                     <div key={product.id} className="col-4 mb-4">
+                        <Link to={`/prodotti/${product.id}`}>Scopri prodotto</Link>
                         <div className="card h-100 text-center p-3">
                             <img src={product.image}
                                 className="card-img-top"
