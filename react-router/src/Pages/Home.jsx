@@ -1,7 +1,7 @@
 function Home() {
 
     return (
-        <h1>Homepage</h1>
+        <h1 className="p-3">Homepage</h1>
     )
 
 }

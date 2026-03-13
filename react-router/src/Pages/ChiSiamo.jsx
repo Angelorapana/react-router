@@ -1,7 +1,7 @@
 function ChiSiamo() {
 
     return (
-        <h1>Chi Siamo</h1>
+        <h1 className="p-3">Chi Siamo</h1>
     )
 }
 
